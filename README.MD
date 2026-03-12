@@ -45,36 +45,36 @@ docs/
 
 **New to this project?** Start here:
 
-1. **[Architecture Overview](architecture/overview.md)** - Understand the system design
-2. **[Data Model](architecture/data-model.md)** - Core tables and relationships
-3. **[API Endpoints](api/endpoints.md)** - REST API specifications
-4. **[Edge Cases](architecture/edge-cases.md)** - Security and business logic
+1. **[Architecture Overview](docs/architecture/overview.md)** - Understand the system design
+2. **[Data Model](docs/architecture/data-model.md)** - Core tables and relationships
+3. **[API Endpoints](docs/api/endpoints.md)** - REST API specifications
+4. **[Edge Cases](docs/architecture/edge-cases.md)** - Security and business logic
 
 **Ready to implement?** Follow this path:
 
-1. **[Database Schema](database/schema.md)** - Set up PostgreSQL
-2. **[Getting Started Guide](guides/getting-started.md)** - Local development setup
-3. **[Implementation Guide](guides/implementation.md)** - Build the API
-4. **[Testing Guide](guides/testing.md)** - Validate your implementation
+1. **[Database Schema](docs/database/schema.md)** - Set up PostgreSQL
+2. **[Getting Started Guide](docs/guides/getting-started.md)** - Local development setup
+3. **[Implementation Guide](docs/guides/implementation.md)** - Build the API
+4. **[Testing Guide](docs/guides/testing.md)** - Validate your implementation
 
 ---
 
 ## Key Documents
 
 ### For Product/Business
-- **[Architecture Overview](architecture/overview.md)** - Business logic and user flows
-- **[Edge Cases](architecture/edge-cases.md)** - How we handle abuse and errors
-- **[CHANGELOG](../CHANGELOG.md)** - v2 improvements and business impact
+- **[Architecture Overview](docs/architecture/overview.md)** - Business logic and user flows
+- **[Edge Cases](docs/architecture/edge-cases.md)** - How we handle abuse and errors
+- **[CHANGELOG](Changelog.md)** - v2 improvements and business impact
 
 ### For Engineers
-- **[Database Schema](database/schema.md)** - Complete table definitions
-- **[API Endpoints](api/endpoints.md)** - REST API contracts
-- **[Implementation Guide](guides/implementation.md)** - Step-by-step build instructions
+- **[Database Schema](docs/database/schema.md)** - Complete table definitions
+- **[API Endpoints](docs/api/endpoints.md)** - REST API contracts
+- **[Implementation Guide](docs/guides/implementation.md)** - Step-by-step build instructions
 
 ### For Security/Compliance
-- **[Security Model](architecture/security.md)** - JWT, transactions, email normalization
-- **[Edge Cases](architecture/edge-cases.md)** - Attack vectors and mitigations
-- **[Error Handling](api/errors.md)** - Proper status codes and messages
+- **[Security Model](docs/architecture/security.md)** - JWT, transactions, email normalization
+- **[Edge Cases](docs/architecture/edge-cases.md)** - Attack vectors and mitigations
+- **[Error Handling](docs/api/errors.md)** - Proper status codes and messages
 
 ---
 
@@ -106,16 +106,16 @@ docs/
 
 **Critical Security Fix**:
 - Email normalization prevents infinite trial abuse via Gmail +aliases
-- See [Security Model](architecture/security.md) for details
+- See [Security Model](docs/architecture/security.md) for details
 
 **Business Improvement**:
 - Cooldown periods (12mo/24mo) enable win-back marketing
 - Estimated +$114K-210K annual revenue impact
-- See [CHANGELOG](../CHANGELOG.md) for full analysis
+- See [CHANGELOG](Changelog.md) for full analysis
 
 **Performance**:
 - Optimized database triggers (~40% faster on large tables)
-- See [Database Triggers](database/triggers.md)
+- See [Database Triggers](docs/database/triggers.md)
 
 ---
 
@@ -183,9 +183,8 @@ docs/
 
 ## Related Resources
 
-- **[README](../README.md)** - Quick summary and key decisions
-- **[CHANGELOG](../CHANGELOG.md)** - Version history and migration guide
-- **[Original Design Doc](../DESIGN_DOC.md)** - Comprehensive 60-page reference
+- **[CHANGELOG](Changelog.md)** - Version history and migration guide
+- **[Original Design Doc](DESIGN_DOC.MD)** - Comprehensive 60-page reference
 
 ---
 
@@ -193,24 +192,24 @@ docs/
 
 This is a design document, not implemented code. To implement:
 
-1. Review [Getting Started](guides/getting-started.md)
-2. Follow [Implementation Guide](guides/implementation.md)
-3. Reference [API Specs](api/endpoints.md) and [Database Schema](database/schema.md)
-4. Run tests per [Testing Guide](guides/testing.md)
+1. Review [Getting Started](docs/guides/getting-started.md)
+2. Follow [Implementation Guide](docs/guides/implementation.md)
+3. Reference [API Specs](docs/api/endpoints.md) and [Database Schema](docs/database/schema.md)
+4. Run tests per [Testing Guide](docs/guides/testing.md)
 
 ---
 
 ## Support
 
 **Questions about the design?**
-- Check [Architecture Overview](architecture/overview.md) for high-level explanations
-- Review [Edge Cases](architecture/edge-cases.md) for specific scenarios
-- See [API Examples](api/examples.md) for usage patterns
+- Check [Architecture Overview](docs/architecture/overview.md) for high-level explanations
+- Review [Edge Cases](docs/architecture/edge-cases.md) for specific scenarios
+- See [API Examples](docs/api/examples.md) for usage patterns
 
 **Found an issue?**
-- Security concerns → Review [Security Model](architecture/security.md)
-- Business logic questions → See [Data Model](architecture/data-model.md)
-- Implementation blockers → Check [Implementation Guide](guides/implementation.md)
+- Security concerns → Review [Security Model](docs/architecture/security.md)
+- Business logic questions → See [Data Model](docs/architecture/data-model.md)
+- Implementation blockers → Check [Implementation Guide](docs/guides/implementation.md)
 
 ---
 
