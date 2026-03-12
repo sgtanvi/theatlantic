@@ -1,0 +1,60 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: atlantic_referral
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/init.sh:/docker-entrypoint-initdb.d/02-init.sh
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: atlantic_referral
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      PORT: 3000
+      JWT_SECRET: dev_secret_change_in_prod
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
+
+  test:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: atlantic_referral_test
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET: test_secret
+      NODE_ENV: test
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm test
+    profiles:
+      - test
+
+volumes:
+  postgres_data:
