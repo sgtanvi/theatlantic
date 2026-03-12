@@ -75,7 +75,7 @@ docker compose up -d postgres
 
 ## Project Structure
 
-See [`DocumentationStructure.MD`](../../DocumentationStructure.MD) at the repo root for the full
+See [`DocumentationStructure.MD`](../DocumentationStructure.MD) in the docs folder for the full
 directory layout. Key directories:
 
 ```

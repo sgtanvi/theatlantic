@@ -17,26 +17,32 @@ docs/
 ├── api/                    # API specifications and contracts
 │   ├── endpoints.md        # Complete REST API reference
 │   ├── authentication.md   # Auth strategy and implementation
-│   ├── errors.md          # Error codes and handling
-│   └── examples.md        # Request/response examples
+│   ├── errors.md           # Error codes and handling
+│   └── examples.md         # Request/response examples
 │
-├── database/              # Database design and schema
-│   ├── schema.md          # Complete schema with rationale
-│   ├── functions.md       # PostgreSQL functions
-│   ├── triggers.md        # Database triggers
-│   └── migrations.md      # v1→v2 migration guide
+├── database/               # Database design and schema
+│   ├── schema.md           # Complete schema with rationale
+│   ├── functions.md        # PostgreSQL functions
+│   ├── triggers.md         # Database triggers
+│   └── migrations.md       # v1→v2 migration guide
 │
-├── architecture/          # System architecture
-│   ├── overview.md        # High-level system design
-│   ├── data-model.md      # Data modeling decisions
-│   ├── edge-cases.md      # Edge case analysis (14 scenarios)
-│   └── security.md        # Security model and measures
+├── architecture/           # System architecture
+│   ├── overview.md         # High-level system design
+│   ├── data-model.md       # Data modeling decisions
+│   ├── edge-cases.md       # Edge case analysis (14 scenarios)
+│   └── security.md         # Security model and measures
 │
-└── guides/                # Implementation and usage guides
-    ├── getting-started.md # Setup and installation
-    ├── implementation.md  # Implementation roadmap
-    ├── testing.md         # Testing strategy
-    └── deployment.md      # Production deployment guide
+├── guides/                 # Implementation and usage guides
+│   ├── getting-started.md  # Setup and installation
+│   ├── implementation.md   # Implementation roadmap
+│   ├── testing.md          # Testing strategy
+│   ├── tdd-workflow.md     # TDD build order and cycle
+│   ├── deployment.md       # Production deployment guide
+│   └── background-jobs.md  # Async job patterns
+│
+├── DESIGN_DOC.MD           # Comprehensive 60-page design reference
+├── DocumentationStructure.MD # Repo and docs layout
+└── directory_tree.md       # Full directory tree
 ```
 
 ---
@@ -184,7 +190,7 @@ docs/
 ## Related Resources
 
 - **[CHANGELOG](Changelog.md)** - Version history and migration guide
-- **[Original Design Doc](DESIGN_DOC.MD)** - Comprehensive 60-page reference
+- **[Original Design Doc](docs/DESIGN_DOC.MD)** - Comprehensive 60-page reference
 
 ---
 
