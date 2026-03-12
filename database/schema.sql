@@ -86,7 +86,7 @@ CREATE TABLE referral_passes (
     id                      UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
     subscription_id         UUID         NOT NULL REFERENCES subscriptions(id) ON DELETE CASCADE,
     user_id                 UUID         NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    token                   VARCHAR(255) NOT NULL UNIQUE,
+    token                   TEXT         NOT NULL UNIQUE,
     is_redeemed             BOOLEAN      NOT NULL DEFAULT FALSE,
     redeemed_by_user_id     UUID         REFERENCES users(id) ON DELETE SET NULL,
     redeemed_at             TIMESTAMP,

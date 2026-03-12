@@ -140,6 +140,86 @@ async function createValidPass() {
 }
 
 /**
+ * Create a user + active subscription with passes, then set expires_at to the
+ * past so the DB-level expiry check fires on redemption.
+ *
+ * @returns {Promise<Object>} First referral_pass row with a valid JWT but past expires_at
+ */
+async function createExpiredPass() {
+  const { user, subscription } = await createUserWithSubscription();
+
+  const passes = await pool.query(
+    `SELECT id, user_id FROM referral_passes
+     WHERE subscription_id = $1 AND token LIKE 'PLACEHOLDER_%'`,
+    [subscription.id]
+  );
+
+  for (const pass of passes.rows) {
+    const token = jwt.sign(
+      { passId: pass.id, referrerId: pass.user_id, type: 'referral_pass' },
+      JWT_SECRET,
+      { expiresIn: '90d' }
+    );
+    await pool.query(
+      `UPDATE referral_passes
+       SET token = $1, expires_at = NOW() - INTERVAL '1 day'
+       WHERE id = $2`,
+      [token, pass.id]
+    );
+  }
+
+  const result = await pool.query(
+    `SELECT * FROM referral_passes
+     WHERE subscription_id = $1
+     ORDER BY created_at ASC LIMIT 1`,
+    [subscription.id]
+  );
+  return result.rows[0];
+}
+
+/**
+ * Create a user + subscription with valid JWT passes, then cancel the subscription.
+ * Used to test that redemption fails when the referrer is no longer active.
+ *
+ * @returns {Promise<Object>} First referral_pass row whose referrer subscription is cancelled
+ */
+async function createPassWithInactiveReferrer() {
+  const { user, subscription } = await createUserWithSubscription();
+
+  const passes = await pool.query(
+    `SELECT id, user_id FROM referral_passes
+     WHERE subscription_id = $1 AND token LIKE 'PLACEHOLDER_%'`,
+    [subscription.id]
+  );
+
+  for (const pass of passes.rows) {
+    const token = jwt.sign(
+      { passId: pass.id, referrerId: pass.user_id, type: 'referral_pass' },
+      JWT_SECRET,
+      { expiresIn: '90d' }
+    );
+    await pool.query(
+      'UPDATE referral_passes SET token = $1 WHERE id = $2',
+      [token, pass.id]
+    );
+  }
+
+  // Cancel the subscription after passes are generated
+  await pool.query(
+    `UPDATE subscriptions SET status = 'cancelled', end_date = NOW() WHERE id = $1`,
+    [subscription.id]
+  );
+
+  const result = await pool.query(
+    `SELECT * FROM referral_passes
+     WHERE subscription_id = $1
+     ORDER BY created_at ASC LIMIT 1`,
+    [subscription.id]
+  );
+  return result.rows[0];
+}
+
+/**
  * Create a user with no subscriptions — eligible to redeem a referral pass.
  *
  * @param {Object} overrides - Forwarded to createUser
@@ -187,6 +267,8 @@ module.exports = {
   createSubscription,
   createUserWithSubscription,
   createValidPass,
+  createExpiredPass,
+  createPassWithInactiveReferrer,
   createEligibleUser,
   createIneligibleUser,
   cleanDatabase,
